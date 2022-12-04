@@ -1,0 +1,87 @@
+package CS410_Project;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+;
+        String initial_state_nfa;
+        String final_state_nfa;
+        ArrayList<String> text_items = new ArrayList<String>();
+        ArrayList<String> alphabet_array_nfa = new ArrayList<String>();
+        ArrayList<String> state_array_nfa = new ArrayList<String>();
+        ArrayList<String> transition_array_nfa = new ArrayList<String>();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the file path with extension .txt: ");
+        File file = new File(scanner.nextLine());
+        scanner = new Scanner(file);
+
+        //C:\Users\ceren\Desktop\CS 410\Project 1\NFA1.txt
+
+        System.out.println("NFA");
+        while (scanner.hasNext()) {
+            text_items.add(scanner.nextLine());
+        }
+        scanner.close();
+
+        for (int i=0; i<text_items.size(); i++) {
+            System.out.println(text_items.get(i));
+        }
+
+        //indexes of the variables
+        int alphabet_index = text_items.indexOf("ALPHABET");
+        int states_index = text_items.indexOf("STATES");
+        int start_index = text_items.indexOf("START");
+        int final_index = text_items.indexOf("FINAL");
+        int transition_index = text_items.indexOf("TRANSITIONS");
+        int end_index = text_items.indexOf("END");
+
+        System.out.println("DFA");
+        //ALPHABET items
+        System.out.println("ALPHABET");
+        for (int i = alphabet_index+1; i < states_index; i++) {
+            alphabet_array_nfa.add(text_items.get(i));
+        }
+        for (int i=0; i<alphabet_array_nfa.size(); i++) {
+            System.out.println(alphabet_array_nfa.get(i));
+        }
+
+        //STATES items
+        System.out.println("STATES");
+        for (int i = states_index+1; i < start_index; i++) {
+            state_array_nfa.add(text_items.get(i));
+        }
+        for (int i=0; i<state_array_nfa.size(); i++) {
+            System.out.println(state_array_nfa.get(i));
+        }
+
+        //START item
+        initial_state_nfa = text_items.get(start_index+1);
+        System.out.println("START");
+        System.out.println(initial_state_nfa);
+
+        //FINAL item
+        final_state_nfa = text_items.get(final_index+1);
+        System.out.println("FINAL");
+        System.out.println(final_state_nfa);
+
+        //TRANSITIONS items
+        System.out.println("TRANSITIONS");
+        for (int i = transition_index+1; i < end_index; i++) {
+            transition_array_nfa.add(text_items.get(i));
+        }
+        for (int i=0; i<transition_array_nfa.size(); i++) {
+            System.out.println(transition_array_nfa.get(i));
+        }
+
+
+    }
+}
