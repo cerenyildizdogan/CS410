@@ -1,0 +1,80 @@
+package CS410_Project;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class CEREN_YILDIZDOGAN_S018367 {
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+        String start_symbol;
+        ArrayList<String> text_items = new ArrayList<String>();
+        ArrayList<String> non_terminal_array_CFG = new ArrayList<String>();
+        ArrayList<String> terminal_array_CFG = new ArrayList<String>();
+        ArrayList<String> rules_array_CFG = new ArrayList<String>();
+        ArrayList<String> non_terminal_array_CNF = new ArrayList<String>();
+        ArrayList<String> terminal_array_CNF = new ArrayList<String>();
+        ArrayList<String> rules_array_CNF = new ArrayList<String>();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the file path with extension .txt: ");
+        File file = new File(scanner.nextLine());
+        scanner = new Scanner(file);
+
+        //C:\Users\ceren\Desktop\CS 410\Project 2\G1.txt
+
+        System.out.println("CFG");
+        while (scanner.hasNext()) {
+            text_items.add(scanner.nextLine());
+        }
+        scanner.close();
+
+        for (int i=0; i<text_items.size(); i++) {
+            System.out.println(text_items.get(i));
+        }
+
+        //indexes of the variables
+        int non_terminal_index = text_items.indexOf("NON-TERMINAL");
+        int terminal_index = text_items.indexOf("TERMINAL");
+        int rules_index = text_items.indexOf("RULES");
+        int start_index = text_items.indexOf("START");
+
+        System.out.println("Chomsky Normal Form");
+        //NON-TERMINAL
+        System.out.println("NON-TERMINAL");
+        for (int i = non_terminal_index+1; i < terminal_index; i++) {
+            non_terminal_array_CFG.add(text_items.get(i));
+        }
+        for (int i=0; i<non_terminal_array_CFG.size(); i++) {
+            System.out.println(non_terminal_array_CFG.get(i));
+        }
+
+        //TERMINAL
+        System.out.println("TERMINAL");
+        for (int i = terminal_index+1; i < rules_index; i++) {
+            terminal_array_CFG.add(text_items.get(i));
+        }
+        for (int i=0; i<terminal_array_CFG.size(); i++) {
+            System.out.println(terminal_array_CFG.get(i));
+        }
+
+        //RULES
+        System.out.println("RULES");
+        for (int i = rules_index+1; i < start_index; i++) {
+            rules_array_CFG.add(text_items.get(i));
+        }
+        for (int i=0; i<rules_array_CFG.size(); i++) {
+            System.out.println(rules_array_CFG.get(i));
+        }
+
+        //START
+        start_symbol = text_items.get(start_index+1);
+        System.out.println("START");
+        System.out.println(start_symbol);
+
+    }
+}
